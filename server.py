@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 import socket
-import sys
+import sys, os
 import threading, time
 
 class Irc2WS_Bridge(WebSocket):
@@ -79,7 +79,7 @@ class Irc2WS_Bridge(WebSocket):
         self.irc_thread.start()
 
 print("Started")
-server = SimpleWebSocketServer('', 80, Irc2WS_Bridge)
+server = SimpleWebSocketServer('', int(os.environ.get('PORT', 8080)), Irc2WS_Bridge)
 server.serveforever()
 
 
