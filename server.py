@@ -78,6 +78,7 @@ class Irc2WS_Bridge(WebSocket):
         self.irc_thread = threading.Thread(target=self.irc_thread_func)
         self.irc_thread.start()
 
+print("Started")
 server = SimpleWebSocketServer('', 80, Irc2WS_Bridge)
 server.serveforever()
 
