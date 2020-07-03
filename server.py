@@ -4,7 +4,7 @@ import socket
 import sys
 import threading, time
 
-class SimpleEcho(WebSocket):
+class Irc2WS_Bridge(WebSocket):
     sock = None
 
     def handleMessage(self):
@@ -78,7 +78,7 @@ class SimpleEcho(WebSocket):
         self.irc_thread = threading.Thread(target=self.irc_thread_func)
         self.irc_thread.start()
 
-server = SimpleWebSocketServer('', 1988, SimpleEcho)
+server = SimpleWebSocketServer('', 80, Irc2WS_Bridge)
 server.serveforever()
 
 
