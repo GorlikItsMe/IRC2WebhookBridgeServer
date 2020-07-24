@@ -1,6 +1,7 @@
 # IRC2WebhookBridgeServer
 IRC Webhook Bridge (now you can create IRC client using webhooks!)
 There could be security issues sooo check it
+Try: https://irc2ws-bridge.herokuapp.com/
 
 ## Install
 ```
