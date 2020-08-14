@@ -1,5 +1,6 @@
 from websocket import create_connection
-ws = create_connection("ws://localhost:1988/")
+ws = create_connection("ws://irc2ws-bridge.herokuapp.com")
+ws = create_connection("ws://localhost:8080")
 #ws.send("irc.europnet.org:6667")
 ws.send("irc.freenode.net:6667")
 print(">> irc.freenode.net:6667")
@@ -9,11 +10,11 @@ print("<< '%s'" % result)
 result =  ws.recv()
 print("<< '%s'" % result)
 
-ws.send("USER gkill_test gkill_test gkill_test :This is fun bot!\n")
-print(">> USER gkill_test gkill_test gkill_test :This is fun bot!\n")
+ws.send("USER irc2ws_test irc2ws_test irc2ws_test :This is fun bot!\n")
+print(">> USER irc2ws_test irc2ws_test irc2ws_test :This is fun bot!\n")
 
-ws.send("NICK gkill_test\n")
-print(">> NICK gkill_test\n")
+ws.send("NICK irc2ws_test\n")
+print(">> NICK irc2ws_test\n")
 
 result =  ws.recv()
 print("<< '%s'" % result)

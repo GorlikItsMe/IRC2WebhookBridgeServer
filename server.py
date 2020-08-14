@@ -36,12 +36,24 @@ class Irc2WS_Bridge(WebSocket):
     
     def irc_thread_func(self):
         #time.sleep(2)
+        r_part = ""
         try:
             while(True):
                 recv=self.sock.recv(2040).decode("utf-8").split("\r\n")
+                last = recv[len(recv)-1]
                 for r in recv:
-                    if(r==""):
+                    if(r==""): # usuwanie ostatniego pustego pakietu (z splita)
                         continue
+
+                    if(r == last):
+                        r_part = r_part+r
+                    else:
+                        if(r_part == ""):
+                            self.sendMessage(r)
+                        else:
+                            self.sendMessage(r_part+r)
+                            r_part = ""           
+
 
                     if(r[0:5] == "ERROR"): # jak jakis blad to zamykaj
                         try:
@@ -56,8 +68,6 @@ class Irc2WS_Bridge(WebSocket):
                         print("JAKIS ERROR ubijam!")
                         break
 
-                    #print(r) # privacy!!
-                    self.sendMessage(r) 
         except Exception as e: # tutaj tez jak error to baj baj
             print("blad sock")
             print(e)
